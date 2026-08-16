@@ -1,6 +1,6 @@
 # LLM Learning
 
-个人 LLM 自学仓库。大二 CS 学生,跟着 Andrej Karpathy 的教程从零手写神经网络与语言模型,这里存放学习笔记与跟写代码,仅作个人学习记录。
+个人 LLM 自学仓库。大二 CS 学生,跟着 Andrej Karpathy 的教程和Claude的指导，从零手写并理解神经网络与语言模型,这里存放学习笔记与跟写代码,仅作个人学习记录。
 
 ## 目录
 
@@ -22,6 +22,7 @@
 
 - Python 3 + PyTorch
 - 本机为 Apple Silicon,使用 MPS 加速(`demo.py` 中会自动检测)
+- 借助claude code进行辅助学习
 - `demo.py` 可直接运行:
 
 ```bash
