@@ -134,13 +134,21 @@ class Neuron:#单个神经元
         out=act.tanh()
         return out
 
+    #三层parameters函数用于获取一个大的参数列表
+    def parameters(self):#第一层
+        return self.w+[self.b]
+
 class Layer:#单层神经元
     def __init__(self,nin,nout):
         self.neurons=[Neuron(nin) for _ in range(nout)]#获取nout个nin维的神经元
 
     def __call__(self,x):
         outs = [n(x) for n in self.neurons]#每一层去call一下，意味着这nout个神经元接收的输入是一样的
-        return outs[0] if len(outs)==1 else outs
+        return outs[0] if len(outs)==1 else outs#当最后只有一个结果的时候只返回单独值而不是列表
+
+    def parameters(self):#第二层parameters
+        return[p for neurons in self.neurons for p in neurons.parameters()]
+        
 class MLP:
     def __init__(self,nin,nouts):
         sz=[nin]+nouts#这里是size的意思
@@ -156,6 +164,9 @@ class MLP:
         return x
     #最终的结果就是输入一个x和结构就可以实现这个MLP
     #最终结果就是最后一层的输出
+
+    def parameters(self):#第三层parameters
+        return[p for layers in self.layers for p in layers.parameters()]
         
 # x1=Value(2.0,label='x1')
 # x2=Value(0.0,label='x2')
@@ -184,9 +195,49 @@ class MLP:
 # out[0].backward()
 # out[0].showvalues()
 
-x=[2.0,3.0,-4.0]
-nouts=[4,4,1]
-m=MLP(3,nouts)#一个3*4*4*1的神经结构
-out=m[x]
-out.backward()
-outß.showvalues()
+# x=[2.0,3.0,-4.0]
+# nouts=[4,4,1]
+# m=MLP(3,nouts)#一个3*4*4*1的神经结构
+# out=m[x]
+# out.backward()
+# outß.showvalues()
+
+#这里xs是四组输入，ys是四组答案，现在的想法是训练一个神经网络，让他接收到xs的输入之后可以去预测对应的ys
+#就像llm用大量的输入输出组合去训练模型
+xs=[
+    [2.0,3.0,-1.0],
+    [3.0,-1.0,0.5],
+    [0.5,1.0,1.0],
+    [1.0,1.0,1.0]
+]
+ys=[1.0,-1.0,-1.0,1.0]
+n=MLP(3,[4,4,1])#和前面的模型的结构是一样的
+ypred=[n(x) for x in xs]
+params=n.parameters()
+print("xs:",xs)
+print("ys:",ys)
+print("ypred:",ypred)
+h=0.0001
+print("300次训练：=============================================")
+for i in range(300):#训练300轮
+    loss = sum((yout-ygt)**2 for ygt,yout in zip(ys,ypred))
+    loss.backward()
+    for param in params:
+        param.data-=param.grad*h
+    ypred=[n(x) for x in xs]
+    print(loss)
+print("训练结束================================================")
+print("ys:",ys)
+print("ypred:",ypred)
+print("目标化训练：=============================================")
+while(loss.data>0.01):#训练到loss<0.01
+    loss = sum((yout-ygt)**2 for ygt,yout in zip(ys,ypred))
+    loss.backward()
+    for param in params:
+        param.data-=param.grad*h
+    ypred=[n(x) for x in xs]
+    print(loss)
+print("训练结束================================================")
+print("ys:",ys)
+print("ypred:",ypred)
+print("训练成功")
