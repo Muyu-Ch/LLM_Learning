@@ -204,6 +204,7 @@ class MLP:
 
 #这里xs是四组输入，ys是四组答案，现在的想法是训练一个神经网络，让他接收到xs的输入之后可以去预测对应的ys
 #就像llm用大量的输入输出组合去训练模型
+print("示例模型=============================================")
 xs=[
     [2.0,3.0,-1.0],
     [3.0,-1.0,0.5],
@@ -241,3 +242,38 @@ print("训练结束================================================")
 print("ys:",ys)
 print("ypred:",ypred)
 print("训练成功")
+
+print("除法模型=============================================")
+xs=[]
+i=1.0
+while(i<10.5):
+    i+=1.0
+    j=1.0
+    while(j<i):
+        xs.append([j,i])
+        j+=1
+
+ys=[(x[0]/x[1]) for x in xs]
+n=MLP(2,[10,10,10,1])
+ypred=[n(x) for x in xs]
+print("xs:",xs)
+print("ys:",ys)
+print("ypred:",ypred)
+h=0.01
+while(loss.data>0.05):
+    #forward
+    ypred=[n(x) for x in xs]
+    loss = sum((yout-ygt)**2 for ygt,yout in zip(ys,ypred))
+
+    #backward
+    loss.backward()
+
+    #update
+    for param in n.parameters():
+        param.data-=param.grad*h
+    ypred=[n(x) for x in xs]
+
+    #打印loss
+    print(i,loss.data)
+print("ys:",ys)
+print("ypred:",ypred)
