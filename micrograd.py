@@ -141,31 +141,52 @@ class Layer:#单层神经元
     def __call__(self,x):
         outs = [n(x) for n in self.neurons]#每一层去call一下，意味着这nout个神经元接收的输入是一样的
         return outs
+class MLP:
+    def __init__(self,nin,nouts):
+        sz=[nin]+nouts#这里是size的意思
+        #nin是第一层x的数量
+        #转换成列表
+        #nouts是每一层神经元的数量
+        #组合就是[x,n1,n2,...]
+        self.layers=[Layer(sz[i],sz[i+1])for i in range(len(nouts))]
 
+    def __call__(self,x):
+        for layer in self.layers:
+            x=layer(x)#递归一层一层联系上
+        return x
+    #最终的结果就是输入一个x和结构就可以实现这个MLP
+    #最终结果就是最后一层的输出
         
-x1=Value(2.0,label='x1')
-x2=Value(0.0,label='x2')
-w1=Value(-3.0,label='w1')
-w2=Value(1.0,label='w2')
-b=Value(6.8813735870195432,label='b')
-x1w1=x1*w1
-x1w1.label='x1*w1'
-x2w2=x2*w2
-x2w2.label='x2*w2'
-x1w1x2w2=x1w1+x2w2
-x1w1x2w2.label='x1*w1+x2*w2'
-n=x1w1x2w2+b
-n.label='n'
-o=n.tanh()
-o.label='o'
-o.grad=1.0
-o.backward()
-#o.showvalues()
+# x1=Value(2.0,label='x1')
+# x2=Value(0.0,label='x2')
+# w1=Value(-3.0,label='w1')
+# w2=Value(1.0,label='w2')
+# b=Value(6.8813735870195432,label='b')
+# x1w1=x1*w1
+# x1w1.label='x1*w1'
+# x2w2=x2*w2
+# x2w2.label='x2*w2'
+# x1w1x2w2=x1w1+x2w2
+# x1w1x2w2.label='x1*w1+x2*w2'
+# n=x1w1x2w2+b
+# n.label='n'
+# o=n.tanh()
+# o.label='o'
+# o.grad=1.0
+# o.backward()
+# o.showvalues()
 
-x=[2.0,3.0]
-n1=Layer(2,3)
-n2=Layer(3,4)
-n3=Layer(4,1)
-out=n3(n2(n1(x)))
+# x=[2.0,3.0]
+# n1=Layer(2,3)
+# n2=Layer(3,4)
+# n3=Layer(4,1)
+# out=n3(n2(n1(x)))
+# out[0].backward()
+# out[0].showvalues()
+
+x=[2.0,3.0,-4.0]
+nouts=[4,4,1]
+m=MLP(3,nouts)#一个3*4*4*1的神经结构
+out=m[x]
 out[0].backward()
 out[0].showvalues()
