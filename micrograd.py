@@ -140,7 +140,7 @@ class Layer:#单层神经元
 
     def __call__(self,x):
         outs = [n(x) for n in self.neurons]#每一层去call一下，意味着这nout个神经元接收的输入是一样的
-        return outs
+        return outs[0] if len(outs)==1 else outs
 class MLP:
     def __init__(self,nin,nouts):
         sz=[nin]+nouts#这里是size的意思
@@ -188,5 +188,5 @@ x=[2.0,3.0,-4.0]
 nouts=[4,4,1]
 m=MLP(3,nouts)#一个3*4*4*1的神经结构
 out=m[x]
-out[0].backward()
-out[0].showvalues()
+out.backward()
+outß.showvalues()
