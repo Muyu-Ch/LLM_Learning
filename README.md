@@ -1,4 +1,4 @@
-# LLM Learning — Andrej Karpathy 教程中文注解版
+# Zero to Hero 中文注解 — Andrej Karpathy 教程伴读仓库
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -45,7 +45,7 @@ jupyter notebook
 ## 📚 致谢与说明
 
 - 代码跟写自 Andrej Karpathy 的公开教程与仓库(MIT License),中文注释与整理为个人学习记录
-- 本人是初学者,注释里可能有理解不到位的地方,欢迎提 [issue](https://github.com/Muyu-Ch/LLM_Learning/issues) 或 PR 指正
+- 本人是初学者,注释里可能有理解不到位的地方,欢迎提 [issue](https://github.com/Muyu-Ch/zero-to-hero-zh/issues) 或 PR 指正
 
 ## 📄 License
 
