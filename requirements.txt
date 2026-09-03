@@ -1,0 +1,10 @@
+# 核心依赖(与本仓库 venv 环境版本一致)
+torch==2.13.0
+numpy==2.5.2
+matplotlib==3.11.1
+
+# Jupyter 内核(在 VS Code 中打开 .ipynb 需要)
+ipykernel==7.3.0
+
+# 可选:如果习惯在浏览器里用 jupyter notebook 命令,取消下面这行的注释
+# notebook>=7.3

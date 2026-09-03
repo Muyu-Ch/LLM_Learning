@@ -17,28 +17,51 @@
 | [`micrograd/micrograd.ipynb`](micrograd/micrograd.ipynb) | 从零实现反向传播引擎(micrograd)与小型 MLP | ✅ |
 | [`makemore/Makemore.ipynb`](makemore/Makemore.ipynb) | 名字生成模型:bigram 计数版(频数矩阵、`multinomial` 采样、并行化生成)已完成;接下来是 loss 与神经网络版 | 🚧 |
 | [`demo.py`](demo.py) | PyTorch 基础笔记:张量、`nn.Embedding`、`F.cross_entropy`、自动求导、MPS 加速 | ✅ |
-| [`demo.ipynb`](demo.ipynb) | 字符级 GPT(nanoGPT):数据集、字符级 tokenizer、批次采样、Bigram 语言模型 | 🚧 |
+| [`demo.ipynb`](demo.ipynb) | 字符级 GPT(nanoGPT):数据集、字符级 tokenizer、批次采样、Bigram 语言模型 | ⬜ |
 | [`input.txt`](input.txt) | tiny Shakespeare 数据集(约 1.1 MB,来自 Karpathy 的 char-rnn 仓库) | — |
+
+> ✅ 已完成 ｜ 🚧 学习中 ｜ ⬜ 未开始
 
 ## 🧭 学习路线(Zero to Hero)
 
-1. **micrograd** — 手写自动求导引擎,理解反向传播的本质([视频](https://www.youtube.com/watch?v=VMj-3S1tku0) / [代码](https://github.com/karpathy/micrograd))
-2. **makemore** — 从 bigram 计数到多层感知机,再到 Transformer 的前身([视频](https://www.youtube.com/watch?v=PaCmpygFfXo) / [代码](https://github.com/karpathy/makemore))
-3. **nanoGPT** — 从零搭建字符级 GPT,理解 Transformer 的每一行([视频](https://www.youtube.com/watch?v=kCc8FmEb1nY) / [代码](https://github.com/karpathy/nanoGPT))
-4. *(计划中)* **GPT-2 from scratch** — 复刻 GPT-2 的完整训练([视频](https://www.youtube.com/watch?v=l8pRSuU81PU) / [代码](https://github.com/karpathy/build-nanogpt))
+1. **micrograd** ✅ — 手写自动求导引擎,理解反向传播的本质([视频](https://www.youtube.com/watch?v=VMj-3S1tku0) / [代码](https://github.com/karpathy/micrograd))
+2. **makemore** 🚧 学习中 — 从 bigram 计数到多层感知机,再到 Transformer 的前身([视频](https://www.youtube.com/watch?v=PaCmpygFfXo) / [代码](https://github.com/karpathy/makemore))
+3. **nanoGPT** ⬜ — 从零搭建字符级 GPT,理解 Transformer 的每一行([视频](https://www.youtube.com/watch?v=kCc8FmEb1nY) / [代码](https://github.com/karpathy/nanoGPT))
+4. **GPT-2 from scratch** ⬜ — 复刻 GPT-2 的完整训练([视频](https://www.youtube.com/watch?v=l8pRSuU81PU) / [代码](https://github.com/karpathy/build-nanogpt))
 
 ## 🚀 快速开始
 
-- 环境:Python 3 + PyTorch(本机 Apple Silicon,自动使用 MPS 加速)
+### 环境
+
+- 本机:Apple Silicon,自动使用 MPS 加速
+- 仓库自带 `venv/` 虚拟环境(Python 3.14.6 + PyTorch 2.13.0 + NumPy 2.5.2 + Matplotlib 3.11.1):
+
+```bash
+source venv/bin/activate
+```
+
+- 其他机器可按 [`requirements.txt`](requirements.txt) 一键复现同样的环境:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 运行
+
 - `demo.py` 可直接运行:
 
 ```bash
 python demo.py
 ```
 
-- 两个 `.ipynb` 用 Jupyter 打开:
+- `.ipynb` 笔记两种打开方式:
+  - **VS Code**(推荐,venv 已装内核支持):直接打开文件,内核选择本仓库的 `venv`
+  - 浏览器:先补装 classic notebook,再启动
 
 ```bash
+pip install notebook
 jupyter notebook
 ```
 
