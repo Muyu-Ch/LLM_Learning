@@ -30,7 +30,8 @@
 
 ### 环境
 
-- 本机:Apple Silicon,自动使用 MPS 加速
+- 个人使用m芯片macbook进行学习，但全程不涉及复杂环境，可使用任意系统电脑；一下环境安装部分适用于macos与linux环境。windows用户们请自行配置环境
+
 - 仓库自带 `venv/` 虚拟环境(Python 3.14.6 + PyTorch 2.13.0 + NumPy 2.5.2 + Matplotlib 3.11.1):
 
 ```bash
@@ -56,8 +57,8 @@ python demo.py
 - `.ipynb` 建议使用Jupyter Lab打开:
 
 ```bash
-pip install notebook
-jupyter notebook
+pip install jupyterlab
+jupyter lab
 ```
 
 ## 📚 致谢与说明
